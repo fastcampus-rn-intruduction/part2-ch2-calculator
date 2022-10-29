@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import Calculator from './src/Calculator';
 
 export default function App() {
@@ -11,9 +11,9 @@ export default function App() {
   const [tempOperator, setTempOperator] = useState(null); // +
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Calculator />
-    </View>
+    </SafeAreaView>
   );
 }
 
