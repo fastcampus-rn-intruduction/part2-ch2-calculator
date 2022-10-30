@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -40,14 +40,32 @@ const ButtonContainer = styled.View`
   flex-direction: row;
   width: 100%;
 `;
+const InputContainer = styled.View`
+  background-color: ${COLOR.RESULT};
+  min-height: 50px;
+  justify-content: center;
+  align-items: flex-end;
+  /* padding: 5px; // top, right, bottom, left */
+  padding: 10px 5px; // top,bottom(vertical), left,right(horizontal)
+  /* padding: 1px 2px 3px 4px; // top right botoom left */
+`;
 
 export default () => {
+  const [input, setInput] = useState(0); // 2 -> 14
+  const [currentOperator, setCurrentOperator] = useState(null); // + -> null
+  const [result, setResult] = useState(null); // 12 -> 14
+  const [tempInput, setTempInput] = useState(null); // 2
+  const [tempOperator, setTempOperator] = useState(null); // +
+
   return (
-    <View style={{ flex: 1, width: 250 }}>
+    <View style={{ flex: 1, width: 250, justifyContent: "center" }}>
       {/* 결과 */}
+      <InputContainer>
+        <Text style={{ color: "white", fontSize: 35, textAlign: "right" }}>{input}</Text>
+      </InputContainer>
 
       {/* [AC ~ /] */}
-      <View style={{ flexDirection: "row", width: "100%" }}>
+      <ButtonContainer>
         <Button
           type="reset"
           text="AC"
@@ -60,7 +78,7 @@ export default () => {
           onPress={() => null}
           flex={1}
         />
-      </View>
+      </ButtonContainer>
 
       {/* [7 ~ x] */}
       <ButtonContainer>
