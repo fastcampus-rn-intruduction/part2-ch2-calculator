@@ -10,6 +10,8 @@ const COLOR = {
   NUM: '#5c5674',
 }
 
+const oneBlockWidth = 80; // 한블럭에 해당하는 가로길이
+
 // Button type: 'reset' | 'operator' | 'num'
 const Button = ({ text, onPress, flex, type, isSelected }) => {
   const backgroundColor = 
@@ -24,11 +26,11 @@ const Button = ({ text, onPress, flex, type, isSelected }) => {
     <TouchableOpacity 
       onPress={onPress} 
       style={{ 
-        flex,
         backgroundColor,
         justifyContent: "center",
         alignItems: "center",
         height: 50,
+        width: oneBlockWidth * flex,
         borderWidth: isSelected ? 1 : 0.2,
         borderColor: "black",
       }}>
@@ -43,6 +45,7 @@ const ButtonContainer = styled.View`
 `;
 const InputContainer = styled.View`
   background-color: ${COLOR.RESULT};
+  width: ${oneBlockWidth * 4}px;
   min-height: 50px;
   justify-content: center;
   align-items: flex-end;
@@ -65,12 +68,16 @@ export default () => {
   } = useCalculator();
 
   return (
-    <View style={{ flex: 1, width: 250, justifyContent: "center" }}>
-      <Text>input: {input}</Text>
-      <Text>currentOperator: {currentOperator}</Text>
-      <Text>result: {result}</Text>
-      <Text>tempInput: {tempInput}</Text>
-      <Text>tempOperator: {tempOperator}</Text>
+    <View style={{ flex: 1, justifyContent: "center" }}>
+      {__DEV__ && (
+        <>
+          <Text>input: {input}</Text>
+          <Text>currentOperator: {currentOperator}</Text>
+          <Text>result: {result}</Text>
+          <Text>tempInput: {tempInput}</Text>
+          <Text>tempOperator: {tempOperator}</Text>
+        </>
+      )}
 
       {/* 결과 */}
       <InputContainer>
